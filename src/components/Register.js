@@ -14,6 +14,7 @@ export default class Register extends Component {
     const user = {
       email: this.state.email,
       username: this.state.username,
+      password: this.state.password
     }
 
     saveUserToJsonServer(user)

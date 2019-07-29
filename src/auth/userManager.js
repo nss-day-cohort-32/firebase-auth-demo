@@ -56,6 +56,9 @@ to be the other user.
 
 */
 
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 const url = 'http://localhost:8088/users';
 
 const setUserInLocalStorage = (user) => {
@@ -108,4 +111,21 @@ export const getUserFromLocalStorage = () => {
 
 export const logout = () => {
   localStorage.removeItem('user');
+}
+
+// This is the method that should do all the things
+// It will return a promise after all these things resolve
+// 1. Add user to firebase
+// 2. Strip out password, add firebaseId to the user object
+// 3. Add user to JSON Server and save in local storage
+export const register = (user) => {
+  return firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+    .then(credentials => {
+      const id = credentials.user.uid;
+      user.id = id;
+      delete user.password;
+    })
+    .then(() => {
+      return saveUserToJsonServer(user);
+    })
 }
