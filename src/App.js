@@ -11,6 +11,11 @@ class App extends Component {
     user: getUserFromLocalStorage()
   }
 
+  logUserOut = () => {
+    this.setState({ user: null });
+    logout();
+  }
+
   render() {
     return (
       <div className="App">
@@ -19,7 +24,7 @@ class App extends Component {
           <Route path="/register" render={(props) => <Register {...props} onRegister={(user) => this.setState({ user: user })} />} />
           <Route exact path="/" render={(props) => {
             return this.state.user ? (
-              <Home {...props} user={this.state.user} onLogout={logout} />
+              <Home {...props} user={this.state.user} onLogout={() => this.logUserOut()} />
             ) : (
                 <Redirect to="/login" />
               )
