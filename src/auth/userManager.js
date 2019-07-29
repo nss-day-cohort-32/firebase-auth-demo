@@ -120,8 +120,8 @@ export const register = (user) => {
 // 1. Send email and pw to firebase to verify (show err msg if invalid)
 // 2. Use the Id that firebase sends back to search for user in JSON Server
 // 3. Save user in local storage
-export const login = (userForm) => {
-  return firebase.auth().signInWithEmailAndPassword(userForm.email, userForm.password)
+export const login = (email, password) => {
+  return firebase.auth().signInWithEmailAndPassword(email, password)
     .then(credentials => {
       const id = credentials.user.id;
       return getUser(id);
