@@ -6,7 +6,8 @@ import { saveUserToJsonServer } from '../auth/userManager';
 export default class Register extends Component {
   state = {
     email: '',
-    username: ''
+    username: '',
+    password: ''
   }
 
   submit = () => {
@@ -47,13 +48,13 @@ export default class Register extends Component {
                     placeholder="Enter an email"
                     onChange={(e) => this.setState({ email: e.target.value })}
                   />
-                  {/* <Form.Field
+                  <Form.Field
                     control="input"
                     type="password"
                     label="Password"
                     placeholder="Password"
                     onChange={(e) => this.setState({ password: e.target.value })}
-                  /> */}
+                  />
                   <Form.Field control="input" type="hidden" />
                   <Button fluid content="Register" color="purple" />
                 </Form>
