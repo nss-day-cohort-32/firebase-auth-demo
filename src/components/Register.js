@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Container, Grid, Message, Segment, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { saveUserToJsonServer } from '../auth/userManager';
+import { register } from '../auth/userManager';
 
 export default class Register extends Component {
   state = {
@@ -17,7 +17,7 @@ export default class Register extends Component {
       password: this.state.password
     }
 
-    saveUserToJsonServer(user)
+    register(user)
       .then((user) => {
         this.props.history.push('/');
         this.props.onRegister(user);

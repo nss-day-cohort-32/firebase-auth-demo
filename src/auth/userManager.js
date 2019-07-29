@@ -113,7 +113,7 @@ export const logout = () => {
   localStorage.removeItem('user');
 }
 
-// This is the method that should do all the things
+// This is the method that should do all the things to register a user
 // It will return a promise after all these things resolve
 // 1. Add user to firebase
 // 2. Strip out password, add firebaseId to the user object
