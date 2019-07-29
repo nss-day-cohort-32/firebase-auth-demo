@@ -123,7 +123,7 @@ export const register = (user) => {
 export const login = (email, password) => {
   return firebase.auth().signInWithEmailAndPassword(email, password)
     .then(credentials => {
-      const id = credentials.user.id;
+      const id = credentials.user.uid;
       return getUser(id);
     })
     .then(user => {
