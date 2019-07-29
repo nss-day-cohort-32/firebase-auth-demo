@@ -31,3 +31,15 @@
     transform: rotate(360deg);
   }
 }
+
+.auth--container, .home--container {
+  margin-top: 50px;
+}
+
+.register--form, .login--form {
+  text-align: left;
+}
+
+.auth--message {
+  text-align: center;
+}
