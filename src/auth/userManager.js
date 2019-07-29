@@ -86,21 +86,6 @@ export const getUser = (userId) => {
     .then(res => res.json());
 }
 
-export const login = (email) => {
-  // NOTE: json-server will return an array, but we only expect one or none users to come back so we just take the first one
-  return fetch(`${url}?email=${email}`)
-    .then(res => res.json())
-    .then(matchingUsers => {
-      if (!matchingUsers.length) {
-        alert('No user exists with that email address');
-        return;
-      }
-      const user = matchingUsers[0];
-      setUserInLocalStorage(user);
-      return user;
-    });
-}
-
 export const getUserFromLocalStorage = () => {
   const user = localStorage.getItem('user');
 
@@ -128,4 +113,21 @@ export const register = (user) => {
     .then(() => {
       return saveUserToJsonServer(user);
     })
+}
+
+// This is the method that should do all the Login things
+// It will return a promise after all these things resolve
+// 1. Send email and pw to firebase to verify (show err msg if invalid)
+// 2. Use the Id that firebase sends back to search for user in JSON Server
+// 3. Save user in local storage
+export const login = (userForm) => {
+  return firebase.auth().signInWithEmailAndPassword(userForm.email, userForm.password)
+    .then(credentials => {
+      const id = credentials.user.id;
+      return getUser(id);
+    })
+    .then(user => {
+      setUserInLocalStorage(user);
+      return user;
+    });
 }
